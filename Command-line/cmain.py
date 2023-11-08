@@ -64,22 +64,24 @@ def password_gen():
     print(f"\nyour password is: \n{final_password}\n")
 
     # write the password in a file
-    with open('stored passwords.txt', 'a') as file:
+    with open(f'{file_name}.txt', 'a') as file:
         file.write(f'\n{final_password}')
     menu()
 
 def make_new_file():
-    print("not implemented yet.")
-    menu()
-    '''while True:
+    while True:
+        global file_name
+        file_name = "stored-passwords.txt"
         try:
-            name = (input("\nwrite a name for the new file:\n"))
-            open(f"{name}.txt", "x")
-            print("\nNew file created !")
-            var = 0
-            menu()
+            file_name = (input("\nwrite a name for the new file:\n"))
+            try:
+                open(f"{name}.txt", "x")
+                print("\nNew file created !\n")
+                menu()
+            except:
+                print("Name error, try again.")
         except FileExistsError:
-            print("Wrong input, try again")'''
+                print("The file already exist, change you file name.")
 
 def settings():
     while True:
@@ -139,7 +141,7 @@ def menu():
             choice = int(input("""\nChoose an option:
 1) make a new password
 2) create a new file
-3) settings
+3) setting
 4) exit\n"""))
             if choice == 1:
                 password_gen()
